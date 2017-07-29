@@ -1,0 +1,9 @@
+{
+  "extends": "eslint-config-airbnb-es5",
+  "env": {
+  	"node": true
+  },
+  "rules": {
+    "new-cap": "off" // for instances of express.Router();
+  }
+}

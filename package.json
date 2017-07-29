@@ -1,0 +1,36 @@
+{
+  "name": "dohyo",
+  "version": "1.0.0",
+  "description": "The wrestling ring used in sumo matches",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Boette <cboette@gmail.com> https://newschematic.org",
+  "license": "GPL-3.0",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "validate": "npm ls",
+    "lint": "eslint .",
+    "test": "echo 'add tests, cowboy'"
+  },
+  "devDependencies": {
+    "eslint": "^2.9.0",
+    "eslint-config-airbnb-base": "^3.0.1",
+    "eslint-config-airbnb-es5": "^1.0.8",
+    "eslint-plugin-import": "^1.7.0",
+    "nodemon": "^1.11.0",
+    "precommit-hook": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "mysql": "^2.14.0",
+    "sequelize": "^3.30.4"
+  },
+  "engines": {
+    "node": "0.10.46"
+  },
+  "pre-commit": [
+    "lint",
+    "validate",
+    "test"
+  ]
+}
