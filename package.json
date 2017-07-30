@@ -7,10 +7,12 @@
   "author": "Boette <cboette@gmail.com> https://newschematic.org",
   "license": "GPL-3.0",
   "scripts": {
-    "dev": "nodemon index.js",
-    "validate": "npm ls",
+    "debug": "node --debug-brk=5858 ./bin/www",
+    "dev-start": "nodemon ./bin/www",
     "lint": "eslint .",
-    "test": "echo 'add tests, cowboy'"
+    "start": "node ./bin/www",
+    "test": "echo 'add tests, cowboy'",
+    "validate": "npm ls"
   },
   "devDependencies": {
     "eslint": "^2.9.0",
@@ -21,6 +23,8 @@
     "precommit-hook": "^3.0.0"
   },
   "dependencies": {
+    "debug": "~2.2.0",
+    "dotenv": "^2.0.0",
     "express": "^4.15.3",
     "mysql": "^2.14.0",
     "sequelize": "^3.30.4"
