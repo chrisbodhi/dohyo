@@ -1,0 +1,108 @@
+#!/usr/bin/env node
+/* eslint-disable vars-on-top, no-console */
+
+/**
+ * Load environment variables.
+ */
+require('dotenv').config();
+
+/**
+ * Module dependencies.
+ */
+var app = require('../app');
+var debug = require('debug')('dohyo:server');
+var http = require('http');
+var db = require('../models/index');
+
+/**
+ * Get port from environment and store in Express.
+ */
+// eslint-disable-next-line no-use-before-define
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app);
+
+/**
+ * Sync any model changes to the database.
+ * Listen on provided port, on all network interfaces.
+ */
+
+db.sequelize
+  .sync()
+  // .sync({ force: true })
+  .then(function dbThen() {
+    // require('../db/seed')(db);
+    server.listen(port, function serverListen() {
+      console.log('Express server listening on http://localhost:' + port);
+    });
+  })
+  .catch(function dbCatch(err) {
+    throw err;
+  });
+
+/* eslint-disable no-use-before-define */
+server.on('error', onError);
+server.on('listening', onListening);
+/* eslint-enable no-use-before-define */
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+function normalizePort(val) {
+  var portVal = parseInt(val, 10);
+
+  if (isNaN(portVal)) {
+    // named pipe
+    return val;
+  }
+
+  if (portVal >= 0) {
+    // port number
+    return portVal;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  // eslint-disable-next-line vars-on-top
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
