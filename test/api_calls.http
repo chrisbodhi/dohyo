@@ -1,0 +1,13 @@
+GET http://localhost:3000/api/surveys
+
+# GET http://localhost:3000/api/survey/1
+
+# POST http://localhost:3000/api/surveys/
+# Content-Type: application/json
+
+# {
+#   "question": "Why?",
+#   "answer1": "Why not?",
+#   "answer2": "Because.",
+#   "answer3": "Woof."
+# }
