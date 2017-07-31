@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = function main(sequelize, DataTypes) {
   var Answer = sequelize.define('Answer', {
     id: {
@@ -10,7 +11,7 @@ module.exports = function main(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function assoc(models) {
-        Answer.hasMany(models.Result, { as: 'results' });
+        Answer.hasMany(models.Tally, { as: 'tallies' });
       }
     }
   });

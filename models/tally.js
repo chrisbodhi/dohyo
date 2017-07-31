@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = function main(sequelize, DataTypes) {
   var Tally = sequelize.define('Tally', {
     id: {
